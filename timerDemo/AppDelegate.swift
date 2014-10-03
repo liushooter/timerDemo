@@ -16,6 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
+        //将CounterViewController的view跟app中唯一的窗口Window关联起来
+        self.window!.rootViewController = CounterViewController()
+        
         // Override point for customization after application launch.
         return true
     }
