@@ -24,7 +24,6 @@ class CounterViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
 
@@ -68,10 +67,21 @@ class CounterViewController: UIViewController {
     
     //使用Swift的方式来解决状态跟UI的同步问题：使用属性的willSet或didSet方法
     var remainingSeconds:  Int = 0 {
+
         willSet(newSeconds) {
             let mins = newSeconds / 60
             let seconds =  newSeconds % 60
-            self.timeLabel!.text = NSString(format: "%02d:%02d", mins, seconds)
+
+            timeLabel!.text = NSString(format: "%02d:%02d", mins, seconds)
+
+            if newSeconds <= 0 {
+                isCounting = false
+                startStopButton!.alpha = 0.3
+                startStopButton!.enabled = false
+            } else{
+                startStopButton!.alpha = 1.0
+                startStopButton!.enabled = true
+            }
         }
     }
     
@@ -185,7 +195,7 @@ class CounterViewController: UIViewController {
     ///
     
     func setSettingButtonsEnabled(enabled: Bool) {
-        for button  in  timeButtons! {
+        for button in timeButtons! {
             button.enabled = false
             button.alpha = enabled ? 1.0 : 0.3
         }
@@ -194,6 +204,7 @@ class CounterViewController: UIViewController {
         clearButton!.alpha = enabled ? 1.0 : 0.3
     }
     
+    //注册系统通知
     func createAndFireLocalNotificationAfterSeconds(seconds: Int) {
         
         UIApplication.sharedApplication().cancelAllLocalNotifications()
