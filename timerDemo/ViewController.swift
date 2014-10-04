@@ -43,13 +43,29 @@ class CounterViewController: UIViewController {
         clearButton!.frame = CGRectMake(10+self.view.bounds.size.width-20-100+20, self.view.bounds.size.height-60, 80, 44)
     }
 
-
     var timeLabel: UILabel? //显示剩余时间
     var timeButtons: [UIButton]? //设置时间的按钮数组
     var startStopButton: UIButton? //启动/停止按钮
     var clearButton: UIButton? //复位按钮
     let timeButtonInfos = [("1分", 60), ("3分", 180), ("5分", 300), ("秒", 1)]
-
+    
+    var timer: NSTimer? // 设置定时器
+    
+    // 启动或停止倒计时
+    //使用Swift的方式来解决状态跟UI的同步问题：使用属性的willSet或didSet方法
+    var isCounting: Bool = false {
+        willSet(newValue) {
+            if newValue {
+                timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTimer", userInfo: nil, repeats: true)
+            } else {
+                timer?.invalidate()
+                timer = nil
+            }
+            
+            setSettingButtonsEnabled(!newValue)
+        }
+    }
+    
     //使用Swift的方式来解决状态跟UI的同步问题：使用属性的willSet或didSet方法
     var remainingSeconds:  Int = 0 {
         willSet(newSeconds) {
@@ -58,7 +74,7 @@ class CounterViewController: UIViewController {
             self.timeLabel!.text = NSString(format: "%02d:%02d", mins, seconds)
         }
     }
-
+    
     //UI Controls
 
     func setupTimeLabel() {
@@ -133,17 +149,43 @@ class CounterViewController: UIViewController {
 
     ///Actions & Callbacks
     func startStopButtonTapped(sender: UIButton) {
+        isCounting = !isCounting //切换了isCounting的状态
     }
 
     func clearButtonTapped(sender: UIButton) {
-        //复位按钮将时间置0
-        remainingSeconds = 0
+        remainingSeconds = 0  //复位按钮将时间置0
     }
 
     //累加时间
     func timeButtonTapped(sender:  UIButton) {
         let (_, seconds) = timeButtonInfos[sender.tag]
         remainingSeconds += seconds
+    }
+    
+    func updateTimer(timer: NSTimer) {
+        remainingSeconds -= 1
+        
+        // 弹出警告窗口,提示倒计时完成
+        if remainingSeconds <= 0 {
+            let alert = UIAlertView()
+            
+            alert.title = "计时完成"
+            alert.message = ""
+            alert.addButtonWithTitle("OK")
+            alert.show()
+        }
+    }
+    
+    ///
+    
+    func setSettingButtonsEnabled(enabled: Bool) {
+        for button  in  timeButtons! {
+            button.enabled = false
+            button.alpha = enabled ? 1.0 : 0.3
+        }
+        
+        clearButton!.enabled = enabled
+        clearButton!.alpha = enabled ? 1.0 : 0.3
     }
 }
 
