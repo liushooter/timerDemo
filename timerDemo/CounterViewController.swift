@@ -17,6 +17,8 @@ class CounterViewController: UIViewController {
         setupTimeLabel()
         setuptimeButtons()
         setupActionButtons()
+
+        remainingSeconds = 0
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,31 +44,33 @@ class CounterViewController: UIViewController {
         clearButton!.frame = CGRectMake(10+self.view.bounds.size.width-20-100+20, self.view.bounds.size.height-60, 80, 44)
     }
 
+    ///UI Element
     var timeLabel: UILabel? //显示剩余时间
     var timeButtons: [UIButton]? //设置时间的按钮数组
     var startStopButton: UIButton? //启动/停止按钮
     var clearButton: UIButton? //复位按钮
     let timeButtonInfos = [("1分", 60), ("3分", 180), ("5分", 300), ("秒", 1)]
-    
-    var timer: NSTimer? // 设置定时器
-    
-    // 启动或停止倒计时
+
+
+    //启动或停止倒计时
     //使用Swift的方式来解决状态跟UI的同步问题：使用属性的willSet或didSet方法
     var isCounting: Bool = false {
         willSet(newValue) {
             if newValue {
-                timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTimer", userInfo: nil, repeats: true)
+                timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTimer:", userInfo: nil, repeats: true)
             } else {
                 timer?.invalidate()
                 timer = nil
             }
-            
+
             setSettingButtonsEnabled(!newValue)
         }
     }
-    
+
+    var timer: NSTimer? // 设置定时器
+
     //使用Swift的方式来解决状态跟UI的同步问题：使用属性的willSet或didSet方法
-    var remainingSeconds:  Int = 0 {
+    var remainingSeconds: Int = 0 {
 
         willSet(newSeconds) {
             let mins = newSeconds / 60
@@ -84,7 +88,7 @@ class CounterViewController: UIViewController {
             }
         }
     }
-    
+
     //UI Controls
 
     func setupTimeLabel() {
@@ -104,23 +108,20 @@ class CounterViewController: UIViewController {
 
             let button: UIButton = UIButton()
             button.tag = index //保存按钮的index
-
             button.setTitle("\(title)", forState: UIControlState.Normal)
 
             button.backgroundColor = UIColor.orangeColor()
             button.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-
             button.setTitleColor(UIColor.blackColor(), forState: UIControlState.Highlighted)
 
-            // 为button绑定TouchUpInside事件
-            button.addTarget(self, action: "timeButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
+            button.addTarget(self, action: "timeButtonTapped:", forControlEvents: UIControlEvents.TouchUpInside)
 
             buttons += [button]
             self.view.addSubview(button)
+
         }
 
         timeButtons = buttons
-
     }
 
     func setupActionButtons() {
@@ -160,7 +161,7 @@ class CounterViewController: UIViewController {
     ///Actions & Callbacks
     func startStopButtonTapped(sender: UIButton) {
         isCounting = !isCounting //切换了isCounting的状态
-        
+
         if isCounting {
             createAndFireLocalNotificationAfterSeconds(remainingSeconds)
         } else {
@@ -173,53 +174,53 @@ class CounterViewController: UIViewController {
     }
 
     //累加时间
-    func timeButtonTapped(sender:  UIButton) {
+    func timeButtonTapped(sender: UIButton) {
         let (_, seconds) = timeButtonInfos[sender.tag]
         remainingSeconds += seconds
     }
-    
+
     func updateTimer(timer: NSTimer) {
         remainingSeconds -= 1
-        
+
         // 弹出警告窗口,提示倒计时完成
         if remainingSeconds <= 0 {
             let alert = UIAlertView()
-            
+
             alert.title = "计时完成"
             alert.message = ""
             alert.addButtonWithTitle("OK")
             alert.show()
         }
     }
-    
+
     ///
-    
+
     func setSettingButtonsEnabled(enabled: Bool) {
         for button in timeButtons! {
-            button.enabled = false
+            button.enabled = enabled
             button.alpha = enabled ? 1.0 : 0.3
         }
-        
+
         clearButton!.enabled = enabled
         clearButton!.alpha = enabled ? 1.0 : 0.3
     }
-    
+
     //注册系统通知
     func createAndFireLocalNotificationAfterSeconds(seconds: Int) {
-        
+
         UIApplication.sharedApplication().cancelAllLocalNotifications()
         let notification = UILocalNotification()
-        
+
         let timeIntervalSinceNow = Double(seconds)
-        
+
         notification.fireDate = NSDate(timeIntervalSinceNow:timeIntervalSinceNow);
-        
+
         notification.timeZone = NSTimeZone.systemTimeZone()
         notification.alertBody = "计时完成！"
-        
+
         UIApplication.sharedApplication().scheduleLocalNotification(notification)
-        
+
     }
-    
+
 }
 
