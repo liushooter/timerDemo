@@ -19,6 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //将CounterViewController的view跟app中唯一的窗口Window关联起来
         self.window!.rootViewController = CounterViewController()
         
+        
+        //注册 使用本地消息
+        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: UIUserNotificationType.Sound | UIUserNotificationType.Alert |
+                UIUserNotificationType.Badge, categories: nil
+                ))
+        
         // Override point for customization after application launch.
         return true
     }
