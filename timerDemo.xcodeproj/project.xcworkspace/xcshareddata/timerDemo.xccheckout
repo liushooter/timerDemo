@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>4734A4A1-7694-402B-A04E-C580AECADE26</string>
+	<key>IDESourceControlProjectName</key>
+	<string>timerDemo</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>6326996236535827941B816E57D7BBD48B7F4DED</key>
+		<string>https://github.com/shooterman/timerDemo.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>timerDemo.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>6326996236535827941B816E57D7BBD48B7F4DED</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/shooterman/timerDemo.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>6326996236535827941B816E57D7BBD48B7F4DED</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>6326996236535827941B816E57D7BBD48B7F4DED</string>
+			<key>IDESourceControlWCCName</key>
+			<string>timerDemo</string>
+		</dict>
+	</array>
+</dict>
+</plist>

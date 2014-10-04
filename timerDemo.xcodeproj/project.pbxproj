@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B053A95119DF8996007FFAED /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = B053A94F19DF8996007FFAED /* .gitignore */; };
 		B0D1B4E519DEC88100F239AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D1B4E419DEC88100F239AD /* AppDelegate.swift */; };
 		B0D1B4E719DEC88100F239AD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D1B4E619DEC88100F239AD /* ViewController.swift */; };
 		B0D1B4EA19DEC88100F239AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0D1B4E819DEC88100F239AD /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B053A94F19DF8996007FFAED /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .gitignore; path = timerDemo/.gitignore; sourceTree = "<group>"; };
 		B0D1B4DF19DEC88100F239AD /* timerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = timerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0D1B4E319DEC88100F239AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B0D1B4E419DEC88100F239AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 				B0D1B4E119DEC88100F239AD /* timerDemo */,
 				B0D1B4F719DEC88100F239AD /* timerDemoTests */,
 				B0D1B4E019DEC88100F239AD /* Products */,
+				B053A94F19DF8996007FFAED /* .gitignore */,
 			);
 			sourceTree = "<group>";
 		};
@@ -192,6 +195,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B053A95119DF8996007FFAED /* .gitignore in Resources */,
 				B0D1B4EA19DEC88100F239AD /* Main.storyboard in Resources */,
 				B0D1B4EF19DEC88100F239AD /* LaunchScreen.xib in Resources */,
 				B0D1B4EC19DEC88100F239AD /* Images.xcassets in Resources */,
@@ -405,6 +409,7 @@
 				B0D1B50019DEC88100F239AD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B0D1B50119DEC88100F239AD /* Build configuration list for PBXNativeTarget "timerDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -413,6 +418,7 @@
 				B0D1B50319DEC88100F239AD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
